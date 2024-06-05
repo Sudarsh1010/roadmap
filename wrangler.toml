@@ -1,0 +1,9 @@
+name = "roadmap"
+compatibility_flags = ["nodejs_compat"]
+node_compat = true
+
+[[d1_databases]]
+binding = "DB"
+database_name = "roadmap"
+database_id = "418b1c5f-08eb-4e92-ac44-224cd711a210"
+preview_database_id = "DB"
