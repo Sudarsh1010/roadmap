@@ -1,8 +1,22 @@
 import "~/styles/globals.css";
 
-import { GeistSans } from "geist/font/sans";
+import { Fira_Mono, Instrument_Sans } from "next/font/google";
 
+import { Toaster } from "~/components/ui/sonner";
+import { cn } from "~/lib/utils";
 import { TRPCReactProvider } from "~/trpc/react";
+
+const mono = Fira_Mono({
+  variable: "--font-mono",
+  weight: ["700", "500", "400"],
+  subsets: ["latin"],
+});
+
+const sans = Instrument_Sans({
+  variable: "--font-sans",
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+});
 
 export const metadata = {
   title: "Create T3 App",
@@ -16,9 +30,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${GeistSans.variable}`}>
-      <body>
+    <html lang="en">
+      <body
+        className={cn(
+          "min-h-screen bg-background font-sans antialiased",
+          sans.variable,
+          mono.variable,
+        )}
+      >
         <TRPCReactProvider>{children}</TRPCReactProvider>
+        <Toaster />
       </body>
     </html>
   );
