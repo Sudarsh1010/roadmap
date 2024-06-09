@@ -11,7 +11,7 @@
   },
   "files": {
     "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.js"],
-    "ignore": [".next/**/*", "node_modules/**/*"]
+    "ignore": [".next/**/*", "node_modules/**/*", ".vercel/**/*"]
   },
   "organizeImports": { "enabled": true },
   "linter": {
@@ -37,7 +37,7 @@
         }
       }
     },
-    "ignore": [".next/**/*", "node_modules/**/*"]
+    "ignore": [".next/**/*", "node_modules/**/*", ".vercel/**/*"]
   },
   "javascript": {
     "formatter": {
@@ -63,7 +63,7 @@
           "style": { "useImportType": "error" }
         }
       },
-      "ignore": [".next/**/*", "node_modules/**/*"]
+      "ignore": [".next/**/*", "node_modules/**/*", ".vercel/**/*"]
     }
   ]
 }

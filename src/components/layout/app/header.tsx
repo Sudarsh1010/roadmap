@@ -1,6 +1,7 @@
 "use client";
 
-import { CircleUser, Home, Menu, Package2 } from "lucide-react";
+import { CircleUser, Home, MapIcon, Menu, Package2 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "~/components/ui/button";
@@ -15,12 +16,20 @@ import {
 import { Sheet, SheetContent, SheetTrigger } from "~/components/ui/sheet";
 import { TextureButton } from "~/components/ui/texture-button";
 import { cn } from "~/lib/utils";
+import { useSession } from "~/provider/session-provider";
+import { invalidateSession } from "~/server/auth/invalidate-session";
 
 export const Header = () => {
   const pathname = usePathname();
+  const { user } = useSession();
 
   return (
-    <header className="flex h-14 items-center gap-4 px-2 md:hidden">
+    <header
+      className={cn(
+        "flex h-14 w-full items-center gap-4 px-2 md:hidden",
+        pathname.startsWith("/roadmap") && "md:flex md:px-3",
+      )}
+    >
       <Sheet>
         <SheetTrigger asChild>
           <Button variant="link" size="icon" className="shrink-0 border-0">
@@ -33,21 +42,32 @@ export const Header = () => {
           <nav className="grid gap-2 font-medium text-lg">
             <Link
               href="/app"
-              className="flex items-center gap-2 font-semibold text-lg"
+              className="mb-4 flex items-center gap-x-2 font-semibold text-lg"
             >
               <Package2 className="h-6 w-6" />
-              <span className="sr-only">Acme Inc</span>
+              <span className="sr-only">Be Studious</span>
             </Link>
 
             <Link
               href="/app"
               className={cn(
-                "mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground",
+                "flex items-center gap-x-4 rounded-md px-3 py-2 text-muted-foreground text-sm hover:text-foreground",
                 pathname.startsWith("/app") && "bg-muted text-primary",
               )}
             >
-              <Home className="h-5 w-5" />
+              <Home className="size-4" />
               Dashboard
+            </Link>
+
+            <Link
+              href="/app"
+              className={cn(
+                "flex items-center gap-x-4 rounded-md px-3 py-2 text-muted-foreground text-sm hover:text-foreground",
+                pathname.startsWith("/roadmap") && "bg-muted text-primary",
+              )}
+            >
+              <MapIcon className="size-4" />
+              Roadmap
             </Link>
           </nav>
         </SheetContent>
@@ -57,10 +77,29 @@ export const Header = () => {
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <TextureButton variant="icon" size="icon" className="rounded-full">
-            <CircleUser className="h-5 w-5" />
+          <>
+            {user?.image ? (
+              <Image
+                className="object-cover"
+                src={user.image}
+                alt={"profile image"}
+                height={24}
+                width={24}
+              />
+            ) : (
+              <TextureButton
+                variant="icon"
+                size="icon"
+                className={cn(
+                  "overflow-hidden rounded-full",
+                  user?.image && "p-0",
+                )}
+              >
+                <CircleUser className="size-5" />
+              </TextureButton>
+            )}
             <span className="sr-only">Toggle user menu</span>
-          </TextureButton>
+          </>
         </DropdownMenuTrigger>
 
         <DropdownMenuContent align="end">
@@ -71,7 +110,11 @@ export const Header = () => {
           <DropdownMenuItem>Support</DropdownMenuItem>
           <DropdownMenuSeparator />
 
-          <DropdownMenuItem>Logout</DropdownMenuItem>
+          <form className="w-full" action={invalidateSession}>
+            <DropdownMenuItem className="w-full hover:cursor-pointer" asChild>
+              <button type="submit">Logout</button>
+            </DropdownMenuItem>
+          </form>
         </DropdownMenuContent>
       </DropdownMenu>
     </header>

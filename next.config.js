@@ -14,6 +14,9 @@ if (process.env.NODE_ENV === "development") {
 const config = {
 	eslint: { ignoreDuringBuilds: true },
 	typescript: { ignoreBuildErrors: true },
+	images: {
+		remotePatterns: [{ hostname: "avatars.githubusercontent.com" }],
+	},
 };
 
 export default config;

@@ -1,0 +1,41 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1717675088210,
+      "tag": "0000_brown_loa",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1717675824108,
+      "tag": "0001_clean_baron_zemo",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1717675866921,
+      "tag": "0002_dapper_viper",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1717675886920,
+      "tag": "0003_complex_mother_askani",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1717701820605,
+      "tag": "0004_overjoyed_preak",
+      "breakpoints": true
+    }
+  ]
+}

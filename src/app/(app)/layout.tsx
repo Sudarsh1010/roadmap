@@ -1,18 +1,21 @@
 import type { ReactNode } from "react";
 import { Header } from "~/components/layout/app/header";
 import { SideNav } from "~/components/layout/app/side-nav";
+import { SessionProvider } from "~/provider/session-provider";
+import { validateRequest } from "~/server/auth/validate-request";
 
-export default function AppLayout({ children }: { children: ReactNode }) {
+export default async function AppLayout({ children }: { children: ReactNode }) {
+  const sessionValue = await validateRequest();
+
   return (
-    <div
-      vaul-drawer-wrapper=""
-      className="grid min-h-screen w-full bg-muted p-2 lg:grid-cols-[250px_1fr] md:grid-cols-[200px_1fr]"
-    >
-      <SideNav />
-      <div className="flex flex-col">
-        <Header />
-        {children}
+    <SessionProvider value={sessionValue}>
+      <div vaul-drawer-wrapper="" className="flex h-svh w-full bg-muted p-2">
+        <SideNav />
+        <div className="flex h-full w-full flex-1 flex-col">
+          <Header />
+          {children}
+        </div>
       </div>
-    </div>
+    </SessionProvider>
   );
 }

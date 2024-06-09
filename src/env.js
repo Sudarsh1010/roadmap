@@ -8,6 +8,8 @@ export const env = createEnv({
    */
   server: {
     GOOGLE_GENERATIVE_AI_API_KEY: z.string(),
+    GITHUB_CLIENT_SECRET: z.string(),
+    GITHUB_CLIENT_ID: z.string(),
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
@@ -29,6 +31,8 @@ export const env = createEnv({
   runtimeEnv: {
     GOOGLE_GENERATIVE_AI_API_KEY: process.env.GOOGLE_GENERATIVE_AI_API_KEY,
     NODE_ENV: process.env.NODE_ENV,
+    GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
+    GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   /**

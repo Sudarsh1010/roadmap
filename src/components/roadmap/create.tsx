@@ -21,13 +21,14 @@ import {
   FormControl,
   FormField,
   FormItem,
+  FormLabel,
   FormMessage,
 } from "~/components/ui/form";
-import { Input } from "~/components/ui/input";
 import { TextureButton } from "~/components/ui/texture-button";
 import { generateRoadmapSchema } from "~/schemas/generate-roadmap-mutation-input";
 import type { GenerateRoadmapSchemaType } from "~/schemas/generate-roadmap-mutation-input";
 import { api } from "~/trpc/react";
+import { Textarea } from "../ui/textarea";
 
 export const CreateRoadmap = () => {
   // router
@@ -43,9 +44,9 @@ export const CreateRoadmap = () => {
 
   // mutation
   const { mutateAsync, isPending } = api.ai.generateRoadmap.useMutation({
-    onSuccess: async () => {
+    onSuccess: async (res) => {
       form.reset();
-      router.refresh();
+      router.push(`/roadmap/${res.id}`);
     },
   });
 
@@ -76,15 +77,17 @@ export const CreateRoadmap = () => {
               </CredenzaDescription>
             </CredenzaHeader>
 
-            <CredenzaBody>
+            <CredenzaBody className="space-y-2">
               <FormField
                 control={form.control}
                 name="prompt"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="space-y-0">
+                    <FormLabel>Prompt</FormLabel>
                     <FormControl>
-                      <Input
+                      <Textarea
                         placeholder="Enter a topic to generate roadmap"
+                        className="max-h-32"
                         {...field}
                       />
                     </FormControl>
