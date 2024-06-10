@@ -10,7 +10,7 @@ export default async function Layout({
   return (
     <>
       {children}
-      <div className="w-80"></div>
+      <div className="w-1/5 max-w-80 max-lg:hidden"></div>
     </>
   );
 }

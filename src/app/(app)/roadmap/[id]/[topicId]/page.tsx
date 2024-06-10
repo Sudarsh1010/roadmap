@@ -20,19 +20,18 @@ export default async function Page({ params: { topicId } }: PageProps) {
   const concepts = await api.concept.all(topicId);
 
   return (
-    <main className="flex flex-1 flex-col overflow-y-scroll py-2">
+    <main className="flex w-full flex-1 flex-col overflow-y-scroll py-2">
       <div className="flex flex-col gap-4 divide-y pr-2">
         {concepts.map((c, index) => {
           return (
             <section
               className={cn(
-                "flex items-start justify-between gap-x-4",
+                "flex items-start justify-between max-lg:flex-col lg:gap-x-3 max-lg:gap-y-2",
                 index > 0 && "pt-4",
               )}
             >
               <div>
                 <GradientHeading size={"xxs"}>{c.title}</GradientHeading>
-
                 <div>
                   <Label>Summary</Label>
                   <ul className="ml-5 list-disc">
@@ -45,7 +44,7 @@ export default async function Page({ params: { topicId } }: PageProps) {
                 </div>
               </div>
 
-              <MinimalCard className="w-full min-w-96 md:w-2/5">
+              <MinimalCard className="w-full lg:w-3/6">
                 <MinimalCardTitle>Resources</MinimalCardTitle>
                 <MinimalCardContent className="mt-2 pb-2">
                   <ul className="list-decimal">

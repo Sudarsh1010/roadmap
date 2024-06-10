@@ -11,10 +11,10 @@ export default async function Layout({
   params: { id: string };
 }) {
   return (
-    <div className="flex h-screen flex-1 flex-col gap-4 overflow-hidden rounded-md bg-white p-4 lg:gap-6 lg:p-6">
+    <div className="flex h-screen flex-1 flex-col gap-4 overflow-hidden rounded-md bg-white p-4 lg:gap-6 max-md:overflow-y-scroll lg:p-6">
       <RoadmapTitle id={id} />
       <Separator />
-      <div className="flex flex-1 gap-4 overflow-hidden lg:gap-6">
+      <div className="flex flex-1 gap-4 overflow-y-hidden max-lg:flex-col lg:gap-6 max-md:overflow-y-scroll">
         <ListTopics id={id} />
         {children}
       </div>
