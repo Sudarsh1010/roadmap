@@ -44,6 +44,7 @@ export const CreateRoadmap = () => {
 
   // mutation
   const { mutateAsync, isPending } = api.ai.generateRoadmap.useMutation({
+    retry: 3,
     onSuccess: async (res) => {
       form.reset();
       router.push(`/roadmap/${res.id}`);
@@ -82,7 +83,7 @@ export const CreateRoadmap = () => {
                 control={form.control}
                 name="prompt"
                 render={({ field }) => (
-                  <FormItem className="space-y-0">
+                  <FormItem className="space-y-1">
                     <FormLabel>Prompt</FormLabel>
                     <FormControl>
                       <Textarea

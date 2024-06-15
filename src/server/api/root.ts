@@ -3,6 +3,7 @@ import { aiRouter } from "./routers/ai";
 import { conceptsRouter } from "./routers/concept";
 import { roadmapRouter } from "./routers/roadmap";
 import { topicsRouter } from "./routers/topic";
+import { projectsRouter } from "./routers/project";
 
 /**
  * This is the primary router for your server.
@@ -14,6 +15,7 @@ export const appRouter = createTRPCRouter({
   roadmap: roadmapRouter,
   topic: topicsRouter,
   concept: conceptsRouter,
+  project: projectsRouter,
 });
 
 // export type definition of API

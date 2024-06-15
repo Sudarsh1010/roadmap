@@ -1,0 +1,1 @@
+ALTER TABLE `project` ADD `references` text DEFAULT '' NOT NULL;

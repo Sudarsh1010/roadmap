@@ -1,8 +1,9 @@
 import type { ReactNode } from "react";
+import { RenderProjects } from "~/components/projects/render-project";
 
 export default async function Layout({
   children,
-  params: {},
+  params: { topicId },
 }: {
   children: ReactNode;
   params: { id: string; topicId: string };
@@ -10,7 +11,7 @@ export default async function Layout({
   return (
     <>
       {children}
-      <div className="w-1/5 max-w-80 max-lg:hidden"></div>
+      <RenderProjects topicId={topicId} />
     </>
   );
 }
