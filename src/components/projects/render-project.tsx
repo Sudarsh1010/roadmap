@@ -18,6 +18,7 @@ export const RenderProjects = async ({ topicId }: { topicId: string }) => {
         {projects.map((p) => (
           <Link
             href={p.reference}
+            target="_blank"
             className={cn(
               buttonVariants({ size: "sm", variant: "link" }),
               "justify-start px-0",

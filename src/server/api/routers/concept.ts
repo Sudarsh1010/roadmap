@@ -59,7 +59,6 @@ export const conceptsRouter = createTRPCRouter({
 `,
           )
         ).map((res) => {
-          console.log(typeof res.resources);
           return {
             ...res,
             summary: JSON.parse(res.summary) as string[],

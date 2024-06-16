@@ -6,6 +6,5 @@ export const usersTable = sqliteTable("user", {
   name: text("name"),
   email: text("email"),
   image: text("image"),
-  github_id: text("github_id").unique(),
-  username: text("username"),
+  clerk_user_id: text("clerk_user_id").unique(),
 });

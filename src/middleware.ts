@@ -1,36 +1,17 @@
-import type { NextRequest } from "next/server";
-import { NextResponse } from "next/server";
-import { validateRequest } from "./server/auth/validate-request";
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
-export async function middleware(request: NextRequest) {
-  let response = NextResponse.next({
-    request: { headers: request.headers },
-  });
+const isProtectedRoute = createRouteMatcher([
+  "/app(.*)",
+  "/roadmap(.*)",
+  "/api/trpc(.*)",
+]);
 
-  const { session, user } = await validateRequest();
-
-  if (
-    request.nextUrl.pathname === "/" ||
-    request.nextUrl.pathname.includes("trpc")
-  ) {
-    return response;
+export default clerkMiddleware((auth, req) => {
+  if (!auth().userId && isProtectedRoute(req)) {
+    return auth().redirectToSignIn();
   }
-
-  const redirectUrl = request.nextUrl.clone();
-  if (request.nextUrl.pathname.includes("login") && session && user) {
-    redirectUrl.pathname = "/app";
-
-    return NextResponse.redirect(redirectUrl);
-  }
-
-  if (!request.nextUrl.pathname.includes("login") && (!session || !user)) {
-    redirectUrl.pathname = "/login";
-    return NextResponse.redirect(redirectUrl);
-  }
-
-  return response;
-}
+});
 
 export const config = {
-  matcher: ["/((?!.*\\..*|_next).*)", "/(api/|trpc/|api/trpc/)(.*)"],
+  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)", "/(api|trpc)(.*)"],
 };

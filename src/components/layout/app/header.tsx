@@ -1,27 +1,16 @@
 "use client";
 
-import { CircleUser, Home, MapIcon, Menu, Package2 } from "lucide-react";
-import Image from "next/image";
+import { SignedIn, UserButton } from "@clerk/nextjs";
+import { Home, MapIcon, Menu, Package2 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+
 import { Button } from "~/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "~/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "~/components/ui/sheet";
-import { TextureButton } from "~/components/ui/texture-button";
 import { cn } from "~/lib/utils";
-import { useSession } from "~/provider/session-provider";
-import { invalidateSession } from "~/server/auth/invalidate-session";
 
 export const Header = () => {
   const pathname = usePathname();
-  const { user } = useSession();
 
   return (
     <header
@@ -74,49 +63,9 @@ export const Header = () => {
       </Sheet>
 
       <div className="w-full flex-1"></div>
-
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <>
-            {user?.image ? (
-              <Image
-                className="object-cover"
-                src={user.image}
-                alt={"profile image"}
-                height={24}
-                width={24}
-              />
-            ) : (
-              <TextureButton
-                variant="icon"
-                size="icon"
-                className={cn(
-                  "overflow-hidden rounded-full",
-                  user?.image && "p-0",
-                )}
-              >
-                <CircleUser className="size-5" />
-              </TextureButton>
-            )}
-            <span className="sr-only">Toggle user menu</span>
-          </>
-        </DropdownMenuTrigger>
-
-        <DropdownMenuContent align="end">
-          <DropdownMenuLabel>My Account</DropdownMenuLabel>
-          <DropdownMenuSeparator />
-
-          <DropdownMenuItem>Settings</DropdownMenuItem>
-          <DropdownMenuItem>Support</DropdownMenuItem>
-          <DropdownMenuSeparator />
-
-          <form className="w-full" action={invalidateSession}>
-            <DropdownMenuItem className="w-full hover:cursor-pointer" asChild>
-              <button type="submit">Logout</button>
-            </DropdownMenuItem>
-          </form>
-        </DropdownMenuContent>
-      </DropdownMenu>
+      <SignedIn>
+        <UserButton />
+      </SignedIn>
     </header>
   );
 };

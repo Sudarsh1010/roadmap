@@ -1,61 +1,19 @@
 {
-  "version": "7",
+  "version": "6",
   "dialect": "sqlite",
   "entries": [
     {
       "idx": 0,
       "version": "6",
-      "when": 1717675088210,
-      "tag": "0000_brown_loa",
+      "when": 1718537904447,
+      "tag": "0000_legal_freak",
       "breakpoints": true
     },
     {
       "idx": 1,
       "version": "6",
-      "when": 1717675824108,
-      "tag": "0001_clean_baron_zemo",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "6",
-      "when": 1717675866921,
-      "tag": "0002_dapper_viper",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "6",
-      "when": 1717675886920,
-      "tag": "0003_complex_mother_askani",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "6",
-      "when": 1717701820605,
-      "tag": "0004_overjoyed_preak",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "6",
-      "when": 1718467389811,
-      "tag": "0005_lean_anita_blake",
-      "breakpoints": true
-    },
-    {
-      "idx": 6,
-      "version": "6",
-      "when": 1718468777657,
-      "tag": "0006_common_roulette",
-      "breakpoints": true
-    },
-    {
-      "idx": 7,
-      "version": "6",
-      "when": 1718469759876,
-      "tag": "0007_cute_wolfsbane",
+      "when": 1718555190291,
+      "tag": "0001_military_betty_brant",
       "breakpoints": true
     }
   ]

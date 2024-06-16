@@ -7,10 +7,13 @@ import {
   resourcesTable,
   roadmapsTable,
   topicsTable,
+  usersTable,
 } from "~/server/db/schema";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { projectsTable } from "~/server/db/schema/project";
 import { TRPCError } from "@trpc/server";
+import { eq } from "drizzle-orm";
+import { redirect } from "next/navigation";
 
 // ai model
 const model = google("models/gemini-1.5-flash-latest");
@@ -53,8 +56,19 @@ const schema = object({
 export const aiRouter = createTRPCRouter({
   generateRoadmap: protectedProcedure
     .input(generateRoadmapSchema)
-    .mutation(async ({ input: { prompt }, ctx: { db, user } }) => {
+    .mutation(async ({ input: { prompt }, ctx: { db, auth } }) => {
       try {
+        const user = await db
+          .select({ id: usersTable.id })
+          .from(usersTable)
+          .where(eq(usersTable.clerk_user_id, auth.userId))
+          .limit(1)
+          .get();
+
+        if (!user) {
+          redirect("sign-in");
+        }
+
         const { object } = await generateObject({
           system: `You are an experienced mentor tasked with generating a detailed roadmap. Your goal is to provide a comprehensive roadmap that includes every single concept, topic, or any other terms relevant to the user's request. 
           Please ensure that the roadmap is thorough and covers all relevant aspects.`,
@@ -63,7 +77,6 @@ export const aiRouter = createTRPCRouter({
           prompt: `generate a roadmap.
           Here is promp: """${prompt}"""`,
         });
-        console.log(object);
 
         const roadmap = await db
           .insert(roadmapsTable)

@@ -8,8 +8,11 @@ export const env = createEnv({
    */
   server: {
     GOOGLE_GENERATIVE_AI_API_KEY: z.string(),
-    GITHUB_CLIENT_SECRET: z.string(),
-    GITHUB_CLIENT_ID: z.string(),
+
+    // clerk
+    CLERK_SECRET_KEY: z.string(),
+    WEBHOOK_SECRET: z.string(),
+
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
@@ -21,6 +24,11 @@ export const env = createEnv({
    * `NEXT_PUBLIC_`.
    */
   client: {
+    // clerk
+    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string(),
+    NEXT_PUBLIC_CLERK_SIGN_IN_URL: z.string(),
+    NEXT_PUBLIC_CLERK_SIGN_UP_URL: z.string(),
+
     // NEXT_PUBLIC_CLIENTVAR: z.string(),
   },
 
@@ -29,10 +37,16 @@ export const env = createEnv({
    * middlewares) or client-side so we need to destruct manually.
    */
   runtimeEnv: {
+    // clerk
+    CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
+    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:
+      process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
+    NEXT_PUBLIC_CLERK_SIGN_IN_URL: process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL,
+    NEXT_PUBLIC_CLERK_SIGN_UP_URL: process.env.NEXT_PUBLIC_CLERK_SIGN_UP_URL,
+    WEBHOOK_SECRET: process.env.WEBHOOK_SECRET,
+
     GOOGLE_GENERATIVE_AI_API_KEY: process.env.GOOGLE_GENERATIVE_AI_API_KEY,
     NODE_ENV: process.env.NODE_ENV,
-    GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
-    GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   /**

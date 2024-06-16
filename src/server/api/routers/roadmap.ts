@@ -4,7 +4,7 @@ import { roadmapsTable, usersTable } from "~/server/db/schema";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 
 export const roadmapRouter = createTRPCRouter({
-  all: protectedProcedure.query(async ({ ctx: { db, user } }) => {
+  all: protectedProcedure.query(async ({ ctx: { db, auth } }) => {
     return await db
       .select({
         id: roadmapsTable.id,
@@ -14,7 +14,7 @@ export const roadmapRouter = createTRPCRouter({
       })
       .from(roadmapsTable)
       .innerJoin(usersTable, eq(roadmapsTable.user_id, usersTable.id))
-      .where(eq(usersTable.id, user.id));
+      .where(eq(usersTable.clerk_user_id, auth.userId!));
   }),
 
   getTitle: protectedProcedure
