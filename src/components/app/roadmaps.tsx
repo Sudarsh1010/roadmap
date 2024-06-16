@@ -26,8 +26,7 @@ export const Roadmaps = async () => {
     <>
       <div className="flex items-center justify-between">
         <h1 className="font-semibold text-lg md:text-2xl">Roadmaps</h1>
-        {/* {roadmaps.length < 3 ? <CreateRoadmap /> : null} */}
-        <CreateRoadmap />
+        {roadmaps.length < 3 ? <CreateRoadmap /> : null}
       </div>
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 sm:grid-cols-2 lg:gap-6">

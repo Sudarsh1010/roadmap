@@ -2,6 +2,7 @@ import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+
 import { GradientHeading } from "~/components/ui/gradient-text";
 import Particles from "~/components/ui/particles";
 import {
@@ -61,14 +62,6 @@ export default async function Page() {
             </p>
           </PopoverContent>
         </Popover>
-
-        {/* <Tooltip>
-					<TooltipTrigger>
-
-					</TooltipTrigger>
-					<TooltipContent>
-				</TooltipContent>
-				</Tooltip> */}
       </main>
 
       <div className="relative mx-auto mt-6 aspect-video w-11/12 overflow-hidden rounded-lg border md:w-full md:rounded-xl">
