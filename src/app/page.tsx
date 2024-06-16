@@ -12,6 +12,8 @@ import {
 } from "~/components/ui/popover";
 import { TextureButton } from "~/components/ui/texture-button";
 
+export const runtime = 'edge';
+
 export default async function Page() {
   return (
     <div className="mx-auto w-full max-w-6xl">
